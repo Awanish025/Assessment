@@ -33,6 +33,7 @@ const Profile = () => {
                             src={`${BASE_URL}/uploads/${userprofile.profile}`}
                             alt=""
                             className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover"
+                            onError={(e) => { e.target.onerror = null; e.target.src = "/man.png"; }}
                         />
 
                         {/* Name */}

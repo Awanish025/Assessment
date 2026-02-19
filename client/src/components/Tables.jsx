@@ -80,7 +80,7 @@ const Tables = ({ userdata, deleteUser, userGet, handlePrevious, handleNext, pag
                                                 </td>
                                                 <td className="px-5 py-4">
                                                     <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-gray-200 p-0.5 bg-white">
-                                                        <img src={`${BASE_URL}/uploads/${element.profile}`} alt="img" className="w-full h-full object-cover rounded-full" />
+                                                        <img src={`${BASE_URL}/uploads/${element.profile}`} alt="img" className="w-full h-full object-cover rounded-full" onError={(e) => { e.target.onerror = null; e.target.src = "/man.png"; }} />
                                                     </div>
                                                 </td>
                                                 <td className="px-5 py-4">
