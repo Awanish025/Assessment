@@ -6,7 +6,7 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:5000";
 
 // Register User
 exports.userpost = async (req, res) => {
-    const file = req.file ? req.file.filename : "";
+    const file = req.file ? req.file.path : "";
     const { firstname, lastname, email, mobile, gender, location, status } = req.body;
 
     if (!firstname || !lastname || !email || !mobile || !gender || !location || !status || !file) {
@@ -15,7 +15,7 @@ exports.userpost = async (req, res) => {
 
     try {
         const preuser = await users.findOne({ email: email });
-       
+
         if (preuser) {
             return res.status(409).json("User already exists");
         } else {
@@ -90,7 +90,7 @@ exports.singleuserget = async (req, res) => {
 exports.useredit = async (req, res) => {
     const { id } = req.params;
     const { firstname, lastname, email, mobile, gender, location, status, user_profile } = req.body;
-    const file = req.file ? req.file.filename : user_profile;
+    const file = req.file ? req.file.path : user_profile;
 
     const dateUpdated = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
 

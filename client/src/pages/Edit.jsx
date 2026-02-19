@@ -113,7 +113,7 @@ const Edit = () => {
                 <h2 className='text-center mt-4 text-xl font-semibold text-gray-800'>Update Your Details</h2>
                 <div className='bg-white shadow-lg mt-4 p-6 rounded-xl'>
                     <div className="text-center">
-                        <img src={image ? preview : `${BASE_URL}/uploads/${imgdata}`} alt="img" className="w-12 h-12 rounded-full object-cover mx-auto" />
+                        <img src={image ? preview : (imgdata || "/man.png")} alt="img" className="w-12 h-12 rounded-full object-cover mx-auto" onError={(e) => { e.target.onerror = null; e.target.src = "/man.png"; }} />
                     </div>
 
                     <form className='mt-6'>

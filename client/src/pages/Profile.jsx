@@ -30,7 +30,7 @@ const Profile = () => {
                     <div className="flex flex-col items-center -mt-12 pb-8 px-6">
                         {/* Profile Image */}
                         <img
-                            src={`${BASE_URL}/uploads/${userprofile.profile}`}
+                            src={userprofile.profile || "/man.png"}
                             alt=""
                             className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover"
                             onError={(e) => { e.target.onerror = null; e.target.src = "/man.png"; }}
