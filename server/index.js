@@ -9,10 +9,20 @@ dotenv.config();
 
 // Middleware
 app.use(cors({
-    origin: [
-        "http://localhost:5173",
-        process.env.CLIENT_URL
-    ].filter(Boolean),
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            "http://localhost:5173",
+            process.env.CLIENT_URL
+        ].filter(Boolean);
+
+        // Allow requests with no origin (mobile apps, Postman, etc.)
+        // Also allow any *.vercel.app subdomain
+        if (!origin || allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
