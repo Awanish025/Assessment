@@ -51,8 +51,8 @@ A full-stack **MERN** application for managing user records with full CRUD opera
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/Awanish025/Assesment.git
-cd Assesment
+git clone https://github.com/Awanish025/Assessment.git
+cd Assessment
 ```
 
 ### 2. Setup the Server
