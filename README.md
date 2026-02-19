@@ -1,10 +1,12 @@
 # 👥 User Management System
 
-A full-stack **MERN** application for managing user records with full CRUD operations, search & filter, pagination, profile image upload, and CSV export.
+A full-stack **MERN** application for managing user records with full CRUD operations, search & filter, pagination, profile image upload (via Cloudinary), and CSV export.
+
+**Live Demo:** [Frontend (Vercel)](https://assessment-rho-five.vercel.app) | [Backend (Render)](https://assessment-ris3.onrender.com)
 
 ## ✨ Features
 
-- **User Registration** — Create users with profile picture upload
+- **User Registration** — Create users with profile picture upload (stored on Cloudinary)
 - **View All Users** — Paginated list with search by name
 - **Filter & Sort** — Filter users by gender and status
 - **Edit User** — Update user details and profile image
@@ -15,12 +17,14 @@ A full-stack **MERN** application for managing user records with full CRUD opera
 
 ## 🛠️ Tech Stack
 
-| Layer     | Technology                                      |
-| --------- | ----------------------------------------------- |
-| Frontend  | React 19, Vite, Tailwind CSS, React Router v7   |
-| Backend   | Node.js, Express 5, Mongoose                    |
-| Database  | MongoDB                                         |
-| Other     | Multer (file upload), Formik + Yup (forms), Axios, Moment.js |
+| Layer      | Technology                                       |
+| ---------- | ------------------------------------------------ |
+| Frontend   | React 19, Vite, Tailwind CSS, React Router v7    |
+| Backend    | Node.js, Express 5, Mongoose                     |
+| Database   | MongoDB Atlas                                    |
+| Storage    | Cloudinary (profile images)                      |
+| Deployment | Vercel (frontend), Render (backend)              |
+| Other      | Multer, Formik + Yup, Axios, Moment.js           |
 
 ## 📁 Project Structure
 
@@ -35,10 +39,8 @@ A full-stack **MERN** application for managing user records with full CRUD opera
 │   ├── controllers/        # Request handlers (CRUD, export)
 │   ├── db/                 # Database connection
 │   ├── models/             # Mongoose schemas
-│   ├── multerconfig/       # File upload configuration
-│   ├── routes/             # API route definitions
-│   └── uploads/            # Uploaded profile images
-└── vercel.json             # Vercel deployment config
+│   ├── multerconfig/       # Cloudinary + Multer config
+│   └── routes/             # API route definitions
 ```
 
 ## 🚀 Getting Started
@@ -46,13 +48,14 @@ A full-stack **MERN** application for managing user records with full CRUD opera
 ### Prerequisites
 
 - **Node.js** (v18+)
-- **MongoDB** (local or [MongoDB Atlas](https://www.mongodb.com/atlas))
+- **MongoDB Atlas** account
+- **Cloudinary** account ([free signup](https://cloudinary.com/users/register_free))
 
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/Awanish025/Assessment.git
-cd Assessment
+git clone https://github.com/Awanish025/Assesment.git
+cd Assesment
 ```
 
 ### 2. Setup the Server
@@ -67,6 +70,9 @@ Create a `.env` file inside `server/`:
 ```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 Start the server:
@@ -87,19 +93,28 @@ The client runs on `http://localhost:5173` and the server on `http://localhost:5
 
 ## 📡 API Endpoints
 
-| Method | Endpoint                | Description          |
-| ------ | ----------------------- | -------------------- |
-| POST   | `/api/users/register`   | Register a new user  |
-| GET    | `/api/users/details`    | Get all users (paginated, filterable) |
-| GET    | `/api/users/export`     | Export users to CSV  |
-| GET    | `/api/users/:id`        | Get single user      |
-| PUT    | `/api/users/edit/:id`   | Update a user        |
-| DELETE | `/api/users/delete/:id` | Delete a user        |
-| PUT    | `/api/users/status/:id` | Toggle user status   |
+| Method | Endpoint                | Description                          |
+| ------ | ----------------------- | ------------------------------------ |
+| POST   | `/api/users/register`   | Register a new user (multipart form) |
+| GET    | `/api/users/details`    | Get all users (paginated, filterable)|
+| GET    | `/api/users/export`     | Export users to CSV                  |
+| GET    | `/api/users/:id`        | Get single user                      |
+| PUT    | `/api/users/edit/:id`   | Update a user                        |
+| DELETE | `/api/users/delete/:id` | Delete a user                        |
+| PUT    | `/api/users/status/:id` | Toggle user status                   |
 
 ## 🌐 Deployment
 
-This project includes a `vercel.json` for deploying to [Vercel](https://vercel.com). The config routes `/api/*` requests to the Express server and serves the React client for all other routes.
+- **Backend** → Deployed on [Render](https://render.com)
+- **Frontend** → Deployed on [Vercel](https://vercel.com) (with `client/vercel.json` for SPA routing)
+
+### Environment Variables
+
+**Render (Backend):**
+`MONGO_URI`, `CLIENT_URL`, `BASE_URL`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
+
+**Vercel (Frontend):**
+`VITE_API_URL` (set to Render backend URL)
 
 ## 📝 License
 
